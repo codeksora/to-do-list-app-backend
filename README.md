@@ -78,3 +78,7 @@ php artisan migrate
 php artisan db:seed
 php artisan migrate:fresh --seed
 ```
+
+I am using GraphQL for API width migrations 
+
+Developed by CARLOS ALEXANDER CHIRITO ROMERO
