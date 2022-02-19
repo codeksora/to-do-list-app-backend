@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 namespace App\GraphQL\Queries\Tasks;
-
 use App\Models\Task;
 use Closure;
 use GraphQL\Type\Definition\ResolveInfo;
@@ -12,10 +11,10 @@ use Rebing\GraphQL\Support\Query;
 use Rebing\GraphQL\Support\SelectFields;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 
-class TasksQuery extends Query
+class TasksByNameQuery extends Query
 {
     protected $attributes = [
-        'name' => 'tasks',
+        'name' => 'TasksByName',
         'description' => 'A query'
     ];
 
@@ -29,23 +28,14 @@ class TasksQuery extends Query
         return [
             'name' => [
                 'name' => 'name', 
-                'type' => Type::string(),
-            ],
-            'completed' => [
-                'name' => 'completed', 
-                'type' => Type::nonNull(Type::int()),
+                'type' => Type::nonNull(Type::string()),
             ],
         ];
     }
 
     public function resolve($root, array $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields)
     {
-
-        $queryWhere[] = ['name', 'like', '%'.$args['name'].'%'];
-
-        if($args['completed'] == 2) $queryWhere[] = ['completed', true];
-        
-        $tasks = Task::where($queryWhere)->get();
+        $tasks = Task::where('name', 'like', '%'.$args['name'].'%')->get();
 
         return $tasks;
     }

@@ -6,6 +6,7 @@ use App\GraphQL\Mutations\Tasks\TasksAddMutation;
 use App\GraphQL\Mutations\Tasks\TasksDeleteMutation;
 use App\GraphQL\Mutations\Tasks\TasksEditMutation;
 use App\GraphQL\Queries\Tasks\TaskQuery;
+use App\GraphQL\Queries\Tasks\TasksByNameQuery;
 use App\GraphQL\Queries\Tasks\TasksQuery;
 use App\GraphQL\Types\TaskType;
 
@@ -82,7 +83,8 @@ return [
         'default' => [
             'query' => [
                 'task' => TaskQuery::class,
-                'tasks' => TasksQuery::class
+                'tasks' => TasksQuery::class,
+                'tasksByName' => TasksByNameQuery::class
             ],
             'mutation' => [
                 'tasksAdd' => TasksAddMutation::class,
